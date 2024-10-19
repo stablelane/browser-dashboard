@@ -53,7 +53,7 @@ navigator.geolocation.getCurrentPosition(position => {
                 <img src=${iconUrl} />
             `
         })
-        .catch(err => console.error(err))ddk
+        .catch(err => console.error(err))
 });
 
 /**
