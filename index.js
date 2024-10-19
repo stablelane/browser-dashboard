@@ -29,7 +29,7 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
             <p>👇: $${data.market_data.low_24h.usd}</p>
         `
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(err))effiecient
 
 // function getCurrentTime() {
 //     const date = new Date()
