@@ -1,3 +1,5 @@
+// fetching random photo of landscape from unsplash on every request
+
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
     .then(res => res.json())
     .then(data => {
@@ -10,6 +12,8 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 )`
 		document.getElementById("author").textContent = `By: Dodi Achmad`
     })
+
+// fetching dogecoin image, name and price from coingecko api
 
 fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     .then(res => {
@@ -31,12 +35,17 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     })
     .catch(err => console.error(err))
 
-// function getCurrentTime() {
-//     const date = new Date()
-//     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
-// }
 
-// setInterval(getCurrentTime, 1000)
+// Getting time and inserting it to the DOM
+function getCurrentTime() {
+    const date = new Date()
+    document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
+}
+
+setInterval(getCurrentTime, 1000)
+
+// getting location from the browswer and fetching the weather for that location using 
+// openweather api
 
 navigator.geolocation.getCurrentPosition(position => {
     fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
@@ -47,25 +56,12 @@ navigator.geolocation.getCurrentPosition(position => {
             return res.json()
         })
         .then(data => {
-            // console.log(data)
             const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
             document.getElementById("weather").innerHTML = `
                 <img src=${iconUrl} />
+                <p class="weather-temp">${Math.round(data.main.temp)}º</p>
+                <p class="weather-city">${data.name}</p>
             `
         })
         .catch(err => console.error(err))
 });
-
-/**
- * Challenge: Display the weather icon as an <img />
- * inside the <div id="weather">
- * 
- * This site shows an example URL for the icon:
- * https://openweathermap.org/weather-conditions
- * 
- * Note: the weather icon is found instead data.weather, which is
- * an array of weather for that area. You can just access the first
- * item in that array to get the icon ID.
- */
-
-// http://openweathermap.org/img/wn/01d@2x.png
